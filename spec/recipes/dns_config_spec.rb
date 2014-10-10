@@ -29,4 +29,16 @@ describe 'consul_services::server' do
     expect(consul_dns_run).to create_template("/etc/consul.d/dns_config.json")
     .with_variables({:max_stale => 60, :allow_stale => true, :node_ttl => 60, :service_ttl => 60})
   end
+
+  it "creates service check for dns" do
+    expect(consul_dns_run).to create_consul_service_def("default-consul-dns")
+        .with(name: 'default-consul-dns')
+        .with(port: 8600)
+    end
+
+  it "creates service check for ui" do
+    expect(consul_dns_run).to create_consul_service_def("default-consul-ui")
+        .with(name: 'default-consul-ui')
+        .with(check: {:interval=>"30s", :script=>"curl -v http://localhost:8500/ui/consul_ui"})
+  end
 end
