@@ -1,0 +1,12 @@
+{
+	"dns_config": {
+    	"node_ttl": "<%= @node_ttl %>s",
+
+        "service_ttl": {
+        	"*": "<%= @service_ttl %>s"
+        },
+        "allow_stale": <%= @allow_stale %>,
+
+        "max_stale": "<%= @max_stale %>s"
+	}
+}
