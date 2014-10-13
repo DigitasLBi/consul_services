@@ -1,8 +1,9 @@
 require 'spec_helper'
 
-def consul_server ipaddress
+def consul_server ipaddress, datacenter
   consul_server = Chef::Node.new()
-  consul_server.default[:ipaddress] = ipaddress
+  consul_server.default['ipaddress'] = ipaddress
+  consul_server.default['consul']['datacenter'] = datacenter
   consul_server
 end
 
@@ -20,20 +21,26 @@ describe 'consul_services::bootstrap' do
           { "name" => "app_name_with_password", "url" => "http://app_url", "username" => "username", "password" => "password" }
         ]
 
+        node.override['consul']['datacenter'] = "default"
+
         allow(Chef::Environment).to receive(:load).and_return(env)
 
         allow(node).to receive(:chef_environment).and_return(env.name)
       end
 
 
-    stub_search("node", "recipes:consul_services\\:\\:server AND chef_environment:default")
-      .and_return([consul_server("console-ip")])
+    stub_search("node", "recipes:consul_services\\:\\:server")
+      .and_return([consul_server("console-ip","default"),consul_server("console-another-dc","another_dc")])
 
     runner.converge(described_recipe,"recipe[consul_services::bootstrap]")
   end
 
   it "create service Consul" do
     expect(bootstrap_run).to start_service("consul")
+  end
+
+  it "Ensure consul only adds server on same DC" do
+    expect(bootstrap_run.node['consul']['servers']).to eq(["console-ip"])
   end
 
   it "creates service check" do

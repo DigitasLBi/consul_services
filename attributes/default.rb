@@ -6,6 +6,8 @@ default['consul']['checksums'] = {
   '0.4.0_linux_amd64'  => '4f8cd1cc5d90be9e1326fee03d3c96289a4f8b9b6ccb062d228125a1adc9ea0c'
 }
 
+default['consul']['log_level'] = "warn"
+
 include_attribute 'bind'
 default['bind']['masters'] = []
 default['bind']['ipv6_listen'] = true

@@ -37,3 +37,7 @@ supports datadog style check from node info
 0.1.8
 ----
 supports services with ports
+
+0.1.9
+-----
+query to look also for datacenter
