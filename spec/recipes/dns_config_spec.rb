@@ -30,7 +30,7 @@ describe 'consul_services::server' do
 
   it "create dns template" do
     expect(consul_dns_run).to create_template("/etc/consul.d/dns_config.json")
-    .with_variables({:max_stale => 60, :allow_stale => true, :node_ttl => 60, :service_ttl => 60})
+    .with_variables({:max_stale => 120, :allow_stale => true, :node_ttl => 240, :service_ttl => 60})
   end
 
   it "creates service check for dns" do

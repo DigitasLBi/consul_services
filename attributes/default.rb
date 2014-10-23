@@ -22,13 +22,14 @@ default['bind']['options'] = [
     'bindkeys-file "/etc/named.iscdlv.key";',
     'managed-keys-directory "/var/named/dynamic";',
     'forward first;',
-    'forwarders { 169.254.169.253; };'
+    'forwarders { 169.254.169.253; };',
+    'allow-recursion { "any"; };'
 ]
 
-default['consul_dns_config']['node_ttl'] = 60
+default['consul_dns_config']['node_ttl'] = 240
 default['consul_dns_config']['service_ttl'] = 60
 default['consul_dns_config']['allow_stale'] = true
-default['consul_dns_config']['max_stale'] = 60
+default['consul_dns_config']['max_stale'] = 120
 
 default['consul_http_checks'] = [ 
     { "name" => "app_name_with_port", "port" => 8888 },

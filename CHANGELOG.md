@@ -41,3 +41,11 @@ supports services with ports
 0.1.9
 -----
 query to look also for datacenter
+
+0.1.10
+-----
+increase node_ttl and max_stale
+
+0.1.11
+-----
+add recursion on bind

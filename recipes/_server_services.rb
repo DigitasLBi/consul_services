@@ -2,8 +2,6 @@ user 'consul' do
 	action :create
 end
 
-node.default['consul_dns_config']['max_stale'] = 60
-
 node.default['consul_http_checks'] = [ 
     { "name" => "consul-ui", 
   		"url" => "http://localhost:8500/ui/consul_ui" },
