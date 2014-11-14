@@ -32,4 +32,9 @@ describe 'consul_services::client' do
   it "create service Consul" do
     expect(client_run).to start_service("consul")
   end
+
+  it "creates resolv.conf with consul servers and domain" do
+    expect(client_run).to create_template('/etc/resolv.conf').with_variables(
+      {"search"=>"helios", "nameservers"=>["console-ip"], "options"=>{}, "server_role"=>"nameserver"})
+  end
 end

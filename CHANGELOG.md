@@ -49,3 +49,11 @@ increase node_ttl and max_stale
 0.1.11
 -----
 add recursion on bind
+
+0.1.12
+------
+remove override for binary to use latest 0.4.1
+
+0.1.13
+------
+Updating resolv.conf with servers

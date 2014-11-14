@@ -1,10 +1,4 @@
 default['consul']['domain'] = 'helios'
-default['consul']['version'] = '0.4.0'
-
-default['consul']['checksums'] = {
-  '0.4.0_web_ui'       => '0ee574e616864b658ba6ecf16db1183b63c5a4a36401880fb0404a2ea18536a6',
-  '0.4.0_linux_amd64'  => '4f8cd1cc5d90be9e1326fee03d3c96289a4f8b9b6ccb062d228125a1adc9ea0c'
-}
 
 default['consul']['log_level'] = "warn"
 
